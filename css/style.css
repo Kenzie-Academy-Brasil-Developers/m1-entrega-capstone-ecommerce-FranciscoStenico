@@ -78,7 +78,7 @@ figure {
     width: inherit;
     height: 160px;
     background-position: center; 
-    background-size: 95%;
+    background-size: 80%;
     background-repeat: no-repeat;
     transition: 500ms;
 }
