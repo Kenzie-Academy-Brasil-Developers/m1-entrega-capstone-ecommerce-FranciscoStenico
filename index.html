@@ -12,7 +12,7 @@
     <header>
       <h1>WearTake</h1>
       <nav>
-        <a href="#">Todos</a>
+        <a href="#" id="all">Todos</a>
         <a href="#">Acessórios</a>
         <a href="#">Calçados</a>
         <a href="#">Camisetas</a>
@@ -20,11 +20,9 @@
     </header>
     <div id="center">
       <main>
-        <div class="productDetails" id="1">
-          <figure>
-            <img src="./img/jaqueta.svg" alt="Jaqueta de frio preta" />
-          </figure>
-          <div class="productInfos">
+        <div class="product" id="1">
+          <figure class="productImg" id="img1"></figure>
+          <div class="productDetails">
             <h5 class="tag">Camisetas</h5>
             <h2 class="nameItem">Lightweight Jacket</h2>
             <p class="description">
@@ -35,14 +33,9 @@
             <h4>Adicionar ao carrinho</h4>
           </div>
         </div>
-        <div class="productDetails" id="2">
-          <figure>
-            <img
-              src="./img/gorro.svg"
-              alt="Gorro preto  de inverno da marca next.js"
-            />
-          </figure>
-          <div class="productInfos">
+        <div class="product" id="2">
+          <figure class="productImg" id="img2"></figure>
+          <div class="productDetails">
             <h5 class="tag">Acessórios</h5>
             <h2 class="nameItem">Black Hat</h2>
             <p class="description">
@@ -53,14 +46,9 @@
             <h4>Adicionar ao carrinho</h4>
           </div>
         </div>
-        <div class="productDetails" id="3">
-          <figure>
-            <img
-              src="./img/mascara.svg"
-              alt="Máscara facial preta durável de uso diário"
-            />
-          </figure>
-          <div class="productInfos">
+        <div class="product" id="3">
+          <figure class="productImg" id="img3"></figure>
+          <div class="productDetails">
             <h5 class="tag">Acessórios</h5>
             <h2 class="nameItem">Mask</h2>
             <p class="description">
@@ -71,14 +59,9 @@
             <h4>Adicionar ao carrinho</h4>
           </div>
         </div>
-        <div class="productDetails" id="4">
-          <figure>
-            <img
-              src="./img/camiseta_preta.svg"
-              alt="T-shirt preta de mangas curtas"
-            />
-          </figure>
-          <div class="productInfos">
+        <div class="product" id="4">
+          <figure class="productImg" id="img4"></figure>
+          <div class="productDetails">
             <h5 class="tag">Camisetas</h5>
             <h2 class="nameItem">T-Shirt</h2>
             <p class="description">
@@ -89,14 +72,9 @@
             <h4>Adicionar ao carrinho</h4>
           </div>
         </div>
-        <div class="productDetails" id="5">
-          <figure>
-            <img
-              src="./img/camiseta_branca.svg"
-              alt="Torso de homem negro utilizando uma t-shirt branca da marca NEXT"
-            />
-          </figure>
-          <div class="productInfos">
+        <div class="product" id="5">
+          <figure class="productImg" id="img5"></figure>
+          <div class="productDetails">
             <h5 class="tag">Camisetas</h5>
             <h2 class="nameItem">Short-Sleeve T-Shirt</h2>
             <p class="description">
@@ -107,14 +85,9 @@
             <h4>Adicionar ao carrinho</h4>
           </div>
         </div>
-        <div class="productDetails" id="6">
-          <figure>
-            <img
-              src="./img/moletom.svg"
-              alt="Torso de homem branco, vestindo uma moletom preta com o logo da marca NEXT estampado no canto superior esquerdo"
-            />
-          </figure>
-          <div class="productInfos">
+        <div class="product" id="6">
+          <figure class="productImg" id="img6"></figure>
+          <div class="productDetails">
             <h5 class="tag">Camisetas</h5>
             <h2 class="nameItem">Champion Packable Jacket</h2>
             <p class="description">
@@ -140,18 +113,14 @@
         </form>
         <div id="shopCart">
           <h3 id="cartTitle">Carrinho de compras</h3>
-          <h4 class="empty">Carrinho vazio</h4>
-          <p class="empty">Adicione itens</p>
+          <div id="cartDetails">
+            <h4 class="empty">Carrinho vazio</h4>
+            <p class="empty">Adicione itens</p>
+          </div>
         </div>
       </aside>
     </div>
     <footer>
-      <nav>
-        <a href="#" id="facebook"></a>
-        <a href="#" id="instagram"></a>
-        <a href="#" id="twitter"></a>
-        <a href="#" id="linkedin"></a>
-      </nav>
       <h6>WearTake® todos os direitos reservados</h6>
     </footer>
   </body>
