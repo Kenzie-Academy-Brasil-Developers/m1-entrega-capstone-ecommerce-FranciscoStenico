@@ -50,6 +50,7 @@ nav a:hover {
     box-sizing: border-box;
     justify-content: center;
     padding: 131px 115px 50px 115px;
+    gap: 55px;
 }
 main {
     display: flex;
@@ -77,28 +78,7 @@ figure {
     box-sizing: border-box;
     width: inherit;
     height: 160px;
-    background-position: center; 
-    background-size: 80%;
-    background-repeat: no-repeat;
     transition: 500ms;
-}
-#img1 {
-    background-image: url('../img/jaqueta.svg');
-}
-#img2 {
-    background-image: url('../img/gorro.svg');
-}
-#img3 {
-    background-image: url('../img/mascara.svg');
-}
-#img4 {
-    background-image: url('../img/camiseta_preta.svg');
-}
-#img5 {
-    background-image: url('../img/camiseta_branca.svg');
-}
-#img6 {
-    background-image: url('../img/moletom.svg');
 }
 .productImg:hover {
     background-size: 110%;
@@ -132,37 +112,48 @@ figure {
     color: #242424;
 }
 .value {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
     line-height: 16px;
     color: #2e245e;
 }
-.productDetails h4 {
+.productDetails button {
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+    background: transparent;
+    width: 100%;
     font-weight: 500;
     font-size: 14px;
     line-height: 30px;
+    cursor: pointer;
     transition: 500ms;
 }
-.productDetails h4:hover {
+.productDetails button:hover {
     border-radius: 5px;
-    padding-left: 50px;
+    padding-left: 55px;
     background: #2e245e;
     color: #fff;
 }
 aside {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 347px;
-    height: 345px;
+    height: fit-content;
+    gap: 27px;
 }
 form {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    background: #f5f5f5;
+    box-shadow: 0px 4px 30px -10px #0004;
+}
+form:hover {
+    box-shadow: 0px 4px 30px -10px #0004;
 }
 input {
-    width: 246px;
+    width: 230px;
     height: 50px;
     border: none;
     padding-left: 14px;
@@ -177,24 +168,23 @@ input::placeholder {
 }
 input:hover {
     background: #e5e5e5;
-    box-shadow: 0px 4px 30px -10px #0004;
 }
 input:focus {
     background: #e5e5e5;
-    box-shadow: 0px 4px 30px -10px #0004;
     outline: none;
 }
 input:focus::placeholder {
     color: transparent;
 }
-button {
+form button {
     border: none;
     background: #37268C;
     color: #fff;
     transition: 500ms;
+    width: 96px;
     cursor: pointer;
 }
-button:hover {
+form button:hover {
     background: #2E245E;
 }
 #shopCart {
@@ -202,7 +192,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 264px;
+    height: fit-content;
 }
 #shopCart h3 {
     display: flex;
@@ -216,15 +206,29 @@ button:hover {
     width: 100%;
     height: 50px;
 }
-#shopCart #cartDetails{
+#cartDetails{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 214px;
+    height: 329px;
     width: 100%;
     background: #f5f5f5;
     gap: 5px;
+    transition: 1s;
+    overflow-y: scroll;
+}
+#cartDetails::-webkit-scrollbar {
+    width: 7px;
+}
+  
+#cartDetails::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+#cartDetails::-webkit-scrollbar-thumb {
+    background: #0003;
+    border-radius: 20px;
 }
 #cartDetails h4 {
     font-weight: 700;
@@ -232,10 +236,71 @@ button:hover {
     line-height: 24px;
     color: #292929;
 }
-#cartDetails p {
+#itemEmpty {
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+}
+.itemSelected {
+    display: flex;
+    align-items: center;
+    margin: 15px 0 15px 14px;
+    gap: 18px;
+}
+.itemSelected figure{
+    width: 150px;
+    height: 92px;
+    background-color: #fff;
+    background-size: cover;
+    background-position: center;
+}
+.selectText {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+}
+.selectText h5 {
+    font-weight: 700;
+    font-size: 16px;
+}
+.selectValue {
+    font-weight: 600;
+    color: #2E245E;
+    font-size: 14px;
+}
+.remove {
+    cursor: pointer;
+    transition: 150ms;
+    font-weight: 400;
+    font-size: 14px;
+}
+.remove:hover {
+    color: #d00;
+}
+#abstract {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 126px;
+}
+.absContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 85%;
+    color: #f5f5f5;
+}
+.absKey {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+}
+.absValue {
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 24px;
 }
 footer {
     display: flex;
