@@ -66,7 +66,7 @@ const data = [
     nameItem: "Champion Packable Jacket",
     description:
       "Proteja-se dos elementos com esta jaqueta embalável Champion. Esta jaqueta de poliést...",
-    value: 100,
+    value: 200,
     addCart: "Adicionar ao carrinho",
     tag: ["Camisetas"],
   },
@@ -76,7 +76,7 @@ const data = [
     nameItem: "Nike Air Jordan",
     description:
       "Talvez o tênis mais emblemático de todos os tempos, esta coloração original \'Chicago\' é...",
-    value: 100,
+    value: 1200,
     addCart: "Adicionar ao carrinho",
     tag: ["Calçados"],
   },
@@ -86,7 +86,7 @@ const data = [
     nameItem: "Adidas Runfalcon",
     description:
       "A escolha para seu momento fit. O tênis Adidas Runfalcon foi desenvolvido com a tecnologia...",
-    value: 100,
+    value: 250,
     addCart: "Adicionar ao carrinho",
     tag: ["Calçados"],
   },

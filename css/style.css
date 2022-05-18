@@ -209,8 +209,8 @@ form button:hover {
 #cartDetails{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 329px;
     width: 100%;
     background: #f5f5f5;
@@ -235,6 +235,12 @@ form button:hover {
     font-size: 22px;
     line-height: 24px;
     color: #292929;
+}
+.hide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 #itemEmpty {
     font-weight: 400;
@@ -281,6 +287,7 @@ form button:hover {
 }
 #abstract {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
     height: 126px;
@@ -304,9 +311,8 @@ form button:hover {
 }
 footer {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     background: #292929;
     color: #fff;
     font-size: 10px;
