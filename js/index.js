@@ -11,45 +11,127 @@ function listEverything() {
     currImg.style.backgroundSize = "79%";
 
     main.innerHTML += `
-        <div class="product" id="${i + 1}">
-            ${currImg.outerHTML}
-            <div class="productDetails">
-                <h5 class="tag">${data[i].tag[0]}</h5>
-                <h2 class="nameItem">${data[i].nameItem}</h2>
-                <p class="description">
-                    ${data[i].description}
-                </p>
-                <p class="value">R$${data[i].value.toFixed(2)}</p>
-                <button class="addButton" id="${
-                  i + 1
-                }">Adicionar ao carrinho</button>
-            </div>
-        </div>
-        `;
+    <div class="product" id="${i + 1}">
+    ${currImg.outerHTML}
+    <div class="productDetails">
+    <h5 class="tag">${data[i].tag[0]}</h5>
+    <h2 class="nameItem" id="NI${i + 1}">${data[i].nameItem}</h2>
+    <p class="description">
+    ${data[i].description}
+    </p>
+    <p class="value" id="V${i + 1}">R$${data[i].value.toFixed(2)}</p>
+      <button class="addButton" id="${i}">Adicionar ao carrinho</button>
+      </div>
+      </div>
+      `;
   }
 }
 listEverything();
 
+const cartDetails = document.querySelector("#cartDetails");
+const hide = document.querySelector(".hide");
+
+let totalQuant = 0;
+let totalPrice = 0;
+
+// adicionando itens no carrinho
+let allSelected = [];
+
+function addButtonFunction(category = "") {
+  const addButtons = document.querySelectorAll(".addButton");
+  addButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      let idNum = parseInt(button.id);
+      let itemCount = 0;
+      if (allSelected.filter((i) => i == idNum).length == 0) {
+        allSelected.push(idNum);
+        addToCart(idNum, category, itemCount);
+        formatCart();
+
+        const remove = document.querySelector(`#rmv${category + idNum}`);
+        remove.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          let removeSelect = remove.parentNode.parentNode;
+          removeSelect.parentNode.removeChild(removeSelect);
+
+          allSelected.pop();
+          formatCart();
+        });
+      } else {
+        
+      }
+    });
+  });
+}
+addButtonFunction();
+
+function formatCart() {
+  if (allSelected.length > 0) {
+    hide.style.display = "none";
+    cartDetails.style.justifyContent = "flex-start";
+    cartDetails.style.alignItems = "flex-start";
+  } else if (allSelected.length == 0) {
+    hide.style.display = "flex";
+    cartDetails.style.justifyContent = "center";
+    cartDetails.style.alignItems = "center";
+  }
+}
+
+function addToCart(btnID, category, quantity) {
+  quantity++;
+  let qtCount = document.createElement("p");
+  qtCount.classList.add("quantCount");
+  qtCount.id = `QC${btnID}`;
+  qtCount.innerHTML = `Qtd.: <strong>${quantity}</strong>`
+
+  cartDetails.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div class="itemSelected" id="select${category + btnID}">
+        ${document.querySelector(`#img${btnID + 1}`).outerHTML}
+        <div class="selectText" id="select${btnID + 1}Details">
+          <h5>${document.querySelector(`#NI${btnID + 1}`).innerText}</h5>
+          <p class="selectValue">${
+            document.querySelector(`#V${btnID + 1}`).innerText
+          }</p>
+          ${qtCount.outerHTML}
+          <h6 class="remove" id="rmv${category + btnID}">Remover produto</h6>
+        </div>
+      </div>
+    `
+  );
+}
+
 // menu nav
 const all = document.querySelector("#all");
-all.addEventListener("click", listEverything);
+all.addEventListener("click", (event) => {
+  event.preventDefault();
+  listEverything();
+  addButtonFunction("All");
+});
 
 const acessories = document.querySelector("#acessories");
 acessories.addEventListener("click", (event) => {
   event.preventDefault();
   filterTag("Acessórios");
+  addButtonFunction("Acs");
 });
 
 const shoes = document.querySelector("#shoes");
 shoes.addEventListener("click", (event) => {
   event.preventDefault();
   filterTag("Calçados");
+  addButtonFunction("Shoe");
 });
 
 const shirts = document.querySelector("#shirts");
 shirts.addEventListener("click", (event) => {
   event.preventDefault();
   filterTag("Camisetas");
+  addButtonFunction("Shirt");
 });
 
 function filterTag(category) {
@@ -68,14 +150,16 @@ function filterTag(category) {
                   ${currImg.outerHTML}
                   <div class="productDetails">
                       <h5 class="tag">${data[i].tag[0]}</h5>
-                      <h2 class="nameItem">${data[i].nameItem}</h2>
+                      <h2 class="nameItem" id="NI${i + 1}">${
+        data[i].nameItem
+      }</h2>
                       <p class="description">
                         ${data[i].description}
                       </p>
-                      <p class="value">R$${data[i].value.toFixed(2)}</p>
-                      <button class="addButton" id="${
-                        i + 1
-                      }">Adicionar ao carrinho</button>
+                      <p class="value" id="V${i + 1}">R$${data[i].value.toFixed(
+        2
+      )}</p>
+                      <button class="addButton" id="${i}">Adicionar ao carrinho</button>
                   </div>
               </div>
               `;
@@ -83,37 +167,15 @@ function filterTag(category) {
   }
 }
 
-const addButtons = document.querySelectorAll(".addButton");
-const cartDetails = document.querySelector("#cartDetails");
-const hide = document.querySelector(".hide");
+//remover itens
+// function removeItem(array) {
+//   const remove = document.querySelectorAll(".remove");
+//   remove.forEach((button) => {
+//     button.addEventListener("click", (event) => {
+//       event.preventDefault();
 
-var totalQuant = 0;
-var totalPrice = 0;
-
-// adicionando itens no carrinho
-var allSelected = [];
-for (let i = 0; i < data.length; i++) {
-    let currBtn = addButtons[i];
-    currBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        
-        allSelected.push(data[currBtn.id - 1]);
-        console.log(data[currBtn.id - 1].img);
-        console.log(data[currBtn.id - 1].nameItem);
-        console.log(data[currBtn.id - 1].value);
-        if (allSelected.length > 0) {
-            hide.style.display = "none"
-        }
-        
-        cartDetails.insertAdjacentHTML('beforeend', `
-            <div class="itemSelected" id="select${i + 1}">
-                ${currImg.outerHTML}
-                <div class="selectText" id="select${i + 1}Details">
-                    <h5>${data[currBtn - 1].nameItem}</h5>
-                    <p class="selectValue">R$${data[currBtn - 1].value}</p>
-                    <h6 class="remove" id="rmv${i + 1}">Remover produto</h6>
-                </div>
-            </div>
-        `);
-  });
-}
+//       let selectMatch = button.parentNode.parentNode;
+//       selectMatch.parentNode.removeChild(selectMatch);
+//     });
+//   });
+// }
