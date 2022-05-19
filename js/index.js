@@ -230,7 +230,7 @@ function filterSearch(inputVal) {
       currImg.style.backgroundRepeat = "no-repeat";
       currImg.style.backgroundSize = "79%";
 
-      if (rgx.test(data[i].nameItem)) {
+      if (rgx.test(data[i].nameItem) || rgx.test(data[i].tag)) {
         main.innerHTML += `
                 <div class="product" id="${i + 1}">
                     ${currImg.outerHTML}

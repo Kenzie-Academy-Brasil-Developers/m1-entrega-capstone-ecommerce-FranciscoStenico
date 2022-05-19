@@ -9,6 +9,7 @@ const data = [
     value: 100,
     addCart: "Adicionar ao carrinho",
     tag: ["Camisetas"],
+    keyWord: ["Lightweight Jacket", "Camiseta", "Camisa", "Jaqueta", "Blusa", 100],
   },
   {
     id: 2,
@@ -19,6 +20,8 @@ const data = [
     value: 65.99,
     addCart: "Adicionar ao carrinho",
     tag: ["Acessórios"],
+    keyWord: ["Black Hat", "Gorro", "Pret", "Inverno", "Acessórios", 65.99],
+
   },
   {
     id: 3,
@@ -45,7 +48,7 @@ const data = [
     img: "./img/tenis-puma.png",
     nameItem: "Puma Ignite",
     description:
-      "Ideal para o dia-a-dia, o Puma ignite fornece a você o conforto necessário para...",
+      "Ideal para o dia-a-dia, o tênis Puma ignite fornece a você o conforto necessário para...",
     value: 150,
     addCart: "Adicionar ao carrinho",
     tag: ["Calçados"],
