@@ -153,7 +153,7 @@ inputBtn.addEventListener("click", (event) => {
   if (input.value.toLowerCase() == "tudo") {
     listEverything();
   }
-  
+
   addButtonFunction("Search")
   input.value = "";
 });
@@ -235,7 +235,7 @@ function filterSearch(inputVal) {
       currImg.style.backgroundRepeat = "no-repeat";
       currImg.style.backgroundSize = "79%";
 
-      if (rgx.test(data[i].nameItem) || rgx.test(data[i].tag)) {
+      if (data[i].keyWord.filter((index) => rgx.test(index)).length !== 0 || rgx.test(data[i].description)) {
         main.innerHTML += `
                 <div class="product" id="${i + 1}">
                     ${currImg.outerHTML}
