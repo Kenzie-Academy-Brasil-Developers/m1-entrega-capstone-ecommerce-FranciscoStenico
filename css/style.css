@@ -168,7 +168,7 @@ input {
     transition: 500ms;
 }
 input::placeholder {
-    color: #242424;
+    color: #888;
 }
 input:hover {
     background: #e5e5e5;
