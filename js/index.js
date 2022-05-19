@@ -149,6 +149,11 @@ const input = document.querySelector("#input");
 inputBtn.addEventListener("click", (event) => {
   event.preventDefault();
   filterSearch(input.value);
+  
+  if (input.value.toLowerCase() == "tudo") {
+    listEverything();
+  }
+  
   addButtonFunction("Search")
   input.value = "";
 });
