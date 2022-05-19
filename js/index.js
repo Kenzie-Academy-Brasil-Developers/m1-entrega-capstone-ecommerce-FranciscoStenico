@@ -183,8 +183,15 @@ shoes.addEventListener("click", (event) => {
 const shirts = document.querySelector("#shirts");
 shirts.addEventListener("click", (event) => {
   event.preventDefault();
-  filterTag("Camisetas");
+  filterTag("Torso");
   addButtonFunction("Shirt");
+});
+
+const legs = document.querySelector("#legs");
+legs.addEventListener("click", (event) => {
+  event.preventDefault();
+  filterTag("Pernas");
+  addButtonFunction("Legs");
 });
 
 function filterTag(category) {
