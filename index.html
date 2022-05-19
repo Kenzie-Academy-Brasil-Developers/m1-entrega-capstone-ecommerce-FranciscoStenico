@@ -38,31 +38,22 @@
         <div id="shopCart">
           <h3 id="cartTitle">Carrinho de compras</h3>
           <div id="cartDetails">
-            <div class="hide">
+            <div class="hideEmpty">
               <h4 class="empty">Carrinho vazio</h4>
               <p class="empty" id="itemEmpty">Adicione itens</p>
             </div>
+            <!-- render via DOM -->
           </div>
-          <!-- <div id="cartDetails">
-            <div class="itemSelected" id="select1">
-              <figure id="img1"></figure>
-              <div class="selectText" id="select1Details">
-                <h5>Lightweight Jacket</h5>
-                <p class="selectValue">R$100.00</p>
-                <h6 class="remove">Remover produto</h6>
-              </div>
-            </div>
-          </div> -->
-          <!-- <footer id="abstract">
+          <footer class="hideAbs" id="abstract">
             <div class="absContainer">
-              <p class="absKey">Quantidade:</p>
-              <p class="absValue">3</p>
+              <p class="absKey">Itens:</p>
+              <p class="absValue" id="abstractQuantity"></p>
             </div>
             <div class="absContainer">
-              <p class="absKey">Valor:</p>
-              <p class="absValue">R$100.00</p>
+              <p class="absKey">Total:</p>
+              <p class="absValue" id="abstractValue"></p>
             </div>
-          </footer> -->
+          </footer>
         </div>
       </aside>
     </div>

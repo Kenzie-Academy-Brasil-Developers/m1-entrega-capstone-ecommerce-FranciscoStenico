@@ -1,4 +1,5 @@
 const main = document.querySelector("main");
+const shopCart = document.querySelector("#shopCart");
 
 function listEverything() {
   main.innerHTML = "";
@@ -19,7 +20,7 @@ function listEverything() {
     <p class="description">
     ${data[i].description}
     </p>
-    <p class="value" id="V${i + 1}">R$${data[i].value.toFixed(2)}</p>
+    <p class="value" id="V${i}">R$${data[i].value.toFixed(2)}</p>
       <button class="addButton" id="${i}">Adicionar ao carrinho</button>
       </div>
       </div>
@@ -29,13 +30,20 @@ function listEverything() {
 listEverything();
 
 const cartDetails = document.querySelector("#cartDetails");
-const hide = document.querySelector(".hide");
+const hideEmpty = document.querySelector(".hideEmpty");
+const hideAbs = document.querySelector(".hideAbs");
 
 let totalQuant = 0;
 let totalPrice = 0;
 
 // adicionando itens no carrinho
 let allSelected = [];
+let selectedTimes = [];
+data.forEach((i) => selectedTimes.push(0));
+let selectedPrices = [];
+data.forEach((i) => selectedPrices.push(0));
+let totalQuantAbs = 0;
+let totalPriceAbs = 0;
 
 function addButtonFunction(category = "") {
   const addButtons = document.querySelectorAll(".addButton");
@@ -44,10 +52,15 @@ function addButtonFunction(category = "") {
       event.preventDefault();
 
       let idNum = parseInt(button.id);
-      let itemCount = 0;
-      if (allSelected.filter((i) => i == idNum).length == 0) {
+      let quantTag = document.querySelector("#abstractQuantity");
+      let ValueTag = document.querySelector("#abstractValue");
+      let CurrPrice = data[idNum].value;
+
+      if (selectedTimes[idNum] == 0) {
+        selectedTimes[idNum]++;
+        selectedPrices[idNum] += CurrPrice;
         allSelected.push(idNum);
-        addToCart(idNum, category, itemCount);
+        addToCart(idNum, category, selectedTimes[idNum]);
         formatCart();
 
         const remove = document.querySelector(`#rmv${category + idNum}`);
@@ -57,12 +70,37 @@ function addButtonFunction(category = "") {
           let removeSelect = remove.parentNode.parentNode;
           removeSelect.parentNode.removeChild(removeSelect);
 
+          totalQuantAbs -= selectedTimes[idNum];
+          quantTag.innerText = totalQuantAbs;
+
+          totalPriceAbs -= selectedTimes[idNum] * CurrPrice;
+          ValueTag.innerText = `R$${totalPriceAbs.toFixed(2)}`;
+
           allSelected.pop();
           formatCart();
+          selectedTimes[idNum] = 0;
         });
       } else {
-        
+        selectedTimes[idNum]++;
+        selectedPrices[idNum] += CurrPrice;
+        // quantidade de itens iguais
+        let currRepeat = document.querySelector(`#QC${idNum}`);
+        currRepeat.innerHTML = `Quantidade: <strong>${selectedTimes[idNum]}</strong>`;
+
+        // valor total dos itens iguais
+        let singleItemPrice = document.querySelector(`#V${idNum}`);
+        let actualItemPrice = document.querySelector(`#value${idNum}`);
+        let valueSingle = parseFloat(singleItemPrice.innerText.slice(2));
+        actualItemPrice.innerText = `R$${(
+          valueSingle * selectedTimes[idNum]
+        ).toFixed(2)}`;
       }
+
+      totalQuantAbs++;
+      quantTag.innerText = totalQuantAbs;
+
+      totalPriceAbs += CurrPrice;
+      ValueTag.innerText = `R$${totalPriceAbs.toFixed(2)}`;
     });
   });
 }
@@ -70,33 +108,34 @@ addButtonFunction();
 
 function formatCart() {
   if (allSelected.length > 0) {
-    hide.style.display = "none";
+    hideAbs.style.display = "flex";
+    hideEmpty.style.display = "none";
     cartDetails.style.justifyContent = "flex-start";
     cartDetails.style.alignItems = "flex-start";
   } else if (allSelected.length == 0) {
-    hide.style.display = "flex";
+    hideAbs.style.display = "none";
+    hideEmpty.style.display = "flex";
     cartDetails.style.justifyContent = "center";
     cartDetails.style.alignItems = "center";
   }
 }
 
 function addToCart(btnID, category, quantity) {
-  quantity++;
   let qtCount = document.createElement("p");
   qtCount.classList.add("quantCount");
   qtCount.id = `QC${btnID}`;
-  qtCount.innerHTML = `Qtd.: <strong>${quantity}</strong>`
+  qtCount.innerHTML = `Quantidade: <strong>${quantity}</strong>`;
 
   cartDetails.insertAdjacentHTML(
     "beforeend",
     `
       <div class="itemSelected" id="select${category + btnID}">
         ${document.querySelector(`#img${btnID + 1}`).outerHTML}
-        <div class="selectText" id="select${btnID + 1}Details">
+        <div class="selectText" id="select${btnID}Details">
           <h5>${document.querySelector(`#NI${btnID + 1}`).innerText}</h5>
-          <p class="selectValue">${
-            document.querySelector(`#V${btnID + 1}`).innerText
-          }</p>
+          <p class="selectValue" id="value${btnID}">${
+      document.querySelector(`#V${btnID}`).innerText
+    }</p>
           ${qtCount.outerHTML}
           <h6 class="remove" id="rmv${category + btnID}">Remover produto</h6>
         </div>
@@ -104,6 +143,15 @@ function addToCart(btnID, category, quantity) {
     `
   );
 }
+
+const inputBtn = document.querySelector("#apply");
+const input = document.querySelector("#input");
+inputBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  filterSearch(input.value);
+  addButtonFunction("Search")
+  input.value = "";
+});
 
 // menu nav
 const all = document.querySelector("#all");
@@ -156,7 +204,7 @@ function filterTag(category) {
                       <p class="description">
                         ${data[i].description}
                       </p>
-                      <p class="value" id="V${i + 1}">R$${data[i].value.toFixed(
+                      <p class="value" id="V${i}">R$${data[i].value.toFixed(
         2
       )}</p>
                       <button class="addButton" id="${i}">Adicionar ao carrinho</button>
@@ -167,15 +215,49 @@ function filterTag(category) {
   }
 }
 
-//remover itens
-// function removeItem(array) {
-//   const remove = document.querySelectorAll(".remove");
-//   remove.forEach((button) => {
-//     button.addEventListener("click", (event) => {
-//       event.preventDefault();
+function filterSearch(inputVal) {
+  let rgx = new RegExp(inputVal, "gi");
+  main.innerHTML = "";
 
-//       let selectMatch = button.parentNode.parentNode;
-//       selectMatch.parentNode.removeChild(selectMatch);
-//     });
-//   });
-// }
+  if (inputVal == "") {
+    listEverything();
+  } else {
+    for (let i = 0; i < data.length; i++) {
+      let currImg = document.createElement("figure");
+      currImg.id = `img${i + 1}`;
+      currImg.style.backgroundImage = `url(${data[i].img})`;
+      currImg.style.backgroundPosition = "center";
+      currImg.style.backgroundRepeat = "no-repeat";
+      currImg.style.backgroundSize = "79%";
+
+      if (rgx.test(data[i].nameItem)) {
+        main.innerHTML += `
+                <div class="product" id="${i + 1}">
+                    ${currImg.outerHTML}
+                    <div class="productDetails">
+                        <h5 class="tag">${data[i].tag[0]}</h5>
+                        <h2 class="nameItem" id="NI${i + 1}">${
+          data[i].nameItem
+        }</h2>
+                        <p class="description">
+                          ${data[i].description}
+                        </p>
+                        <p class="value" id="V${i}">R$${data[i].value.toFixed(
+          2
+        )}</p>
+                        <button class="addButton" id="${i}">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                `;
+      }
+    }
+  }
+  if (main.innerHTML == "") {
+    main.innerHTML = `
+    <h1>Nenhum resultado</h1>
+    <h1>encontrado</h1>
+    `;
+    main.style.fontSize = "40px";
+    main.style.color = "#aaa";
+  }
+}

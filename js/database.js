@@ -76,7 +76,7 @@ const data = [
     nameItem: "Nike Air Jordan",
     description:
       "Talvez o tênis mais emblemático de todos os tempos, esta coloração original \'Chicago\' é...",
-    value: 1200,
+    value: 175.5,
     addCart: "Adicionar ao carrinho",
     tag: ["Calçados"],
   },
